@@ -11,7 +11,7 @@ class Solution {
         // code here
         vector<int>ans;
         
-        //s->starting row, column       e->ending row, column
+        //s->starting row, column      e->ending row, column
         int sRow=0, sCol=0, eCol=c-1, eRow=r-1;
         
         while(sRow<=eRow && sCol<=eCol){
