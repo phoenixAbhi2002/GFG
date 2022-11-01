@@ -10,32 +10,42 @@ using namespace std;
 
 class Solution{   
 public:
-    int median(vector<vector<int>> &matrix, int r, int c){
-        // code here          
-       int mini=INT_MAX, maxi=INT_MIN,res;
-       for(int i=0;i<r;i++){
-           mini=min(mini,matrix[i][0]);
-           maxi=max(maxi,matrix[i][c-1]);
-       }
-       
-       int x=(r*c+1)/2;
-       
-       while(mini<=maxi){
-           
-           int mid=mini+(maxi-mini)/2;
-           int count=0;
-           
-           for(int i=0;i<r;i++)
-               count+=upper_bound(matrix[i].begin(),matrix[i].end(),mid)-matrix[i].begin();
-               
-           if(count<x)
-               mini=mid+1;
-           else{
-               res=mid;
-               maxi=mid-1;
-           }
-       }
-       return res;
+    int solve(vector<int> &A, int val){
+        
+        int low=0, high=A.size()-1;
+        
+        while(low<=high){
+            int mid=low+(high-low)/2;
+            
+            if(A[mid] <= val)
+                low=mid+1;
+            else
+                high=mid-1;
+        }
+        return low;
+    }
+    int median(vector<vector<int>> &matrix, int R, int C){
+        // code here  
+        int low=1, high=2001;
+        
+        int actual_count=(R*C-1)/2;
+        
+        while(low<=high){
+            int mid=low + (high-low)/2;
+            
+            //finding no of elements less than mid
+            int count=0;
+            for(int i=0;i<R;i++){
+                count+=solve(matrix[i], mid);
+            }
+            
+            //checking count
+            if(count<=actual_count)
+                low=mid+1;
+            else
+                high=mid-1;
+        }
+        return low;
     }
 };
 
