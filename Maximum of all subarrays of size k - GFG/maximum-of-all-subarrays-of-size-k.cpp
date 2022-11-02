@@ -35,7 +35,6 @@ class Solution
             if(i>=k-1)  
                 ans.push_back(arr[dq.front()]);
         }
-
         return ans;
     }
 };
