@@ -10,29 +10,22 @@ using namespace std;
 
 class Solution{
     public:
-    int solve(vector<int>&arr, int i, int j, int k, vector<vector<int>>&dp){
-        if(i>=j)
-            return 0;
-            
-        if(arr[j]-arr[i] <= k)
-            return 0;
-            
-        if(dp[i][j]!=-1)
-            return dp[i][j];
-            
-        int ans=0;
-        
-        ans=1 + min(solve(arr, i+1, j, k, dp), solve(arr, i, j-1, k, dp));
-        
-        return dp[i][j]=ans;
-    }
     int removals(vector<int>& arr, int k){
         //Code here
         int n=arr.size();
         sort(arr.begin(), arr.end());
         
-        vector<vector<int>>dp(n+1, vector<int>(n+1, -1));
-        return solve(arr, 0, n-1, k, dp);
+        int ans=n-1;
+        
+        for(int i=0;i<n;i++){
+            
+            /*Since we want to search for the max element from which if arr[i] is subtracted <k
+            i.e the number just before the upper_bound
+            That's why subtract 1*/
+            int j=upper_bound(arr.begin()+i, arr.begin()+n, arr[i]+k) - arr.begin() - 1;
+            ans = min(ans, n-(j-i+1));
+        }
+        return ans;
     }
 };
 
