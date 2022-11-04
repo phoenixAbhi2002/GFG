@@ -11,7 +11,7 @@ class Solution {
         visited[node]=1;
         for(auto it:adj[node]){
             if(visited[it]==0)
-            dfs(it,ans,visited,adj);
+                dfs(it,ans,visited,adj);
         }
     }
     
