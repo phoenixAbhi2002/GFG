@@ -12,7 +12,7 @@ class Solution{
 public:
     int toyCount(int N, int K, vector<int> arr)
     {
-        // code here
+        
         sort(arr.begin(), arr.end());
         int count=0;
         
