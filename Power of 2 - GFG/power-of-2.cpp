@@ -16,18 +16,8 @@ class Solution{
         if(n==0)
             return false;
 
-        if(n==1 || n==2)
-            return true;
-            
-        else{
-            while(n>2){
-                if(n%2==0)
-                    n=n/2;
-                else 
-                    return false;
-            }
-        }
-        return true;
+        return (ceil(log2(n)) == floor(log2(n)));    
+        
     }
 };
 
