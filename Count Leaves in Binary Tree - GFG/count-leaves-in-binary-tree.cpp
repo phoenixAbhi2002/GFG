@@ -116,14 +116,25 @@ struct Node
    20       30 */
 int countLeaves(Node* root)
 {
-    // If there is no nodce present
-    if(root == NULL)
-        return 0;
-   
-    // Since the leaf node wouldn't have any nodes present
-    if(root->left == NULL && root->right == NULL)
-        return 1;
+    int ctr;    //counter to keep track of the number of leaf nodes
+    queue<Node*> q;
+    q.push(root);
     
-    // Calculating for both right and left subtrees
-    return countLeaves(root->left) + countLeaves(root->right);
+    while(!q.empty()){
+        int n = q.size();
+        
+        while(n--){
+            Node* temp = q.front();
+            q.pop();
+            
+            if(!temp->left && !temp->right)
+                ctr++;
+            
+            if(temp->left)
+                q.push(temp->left);
+            if(temp->right)
+                q.push(temp->right);
+        }
+    }
+    return ctr;
 }
