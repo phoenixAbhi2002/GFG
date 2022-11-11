@@ -21,7 +21,7 @@ int main()
 int longestSubstrDistinctChars (string S)
 {
     int ans=0;
-    vector<int>mp(256, -1);
+    vector<int>mp(256, -1);     //256 is written so as to avoid writing - '0' again and again 
     int j=0;
     
     for(int i=0; i<S.size(); i++){
