@@ -20,27 +20,27 @@ struct Node {
 
 // } Driver Code Ends
 class Solution
-{   
-    // Inorder traversal of a binary search tree is always in a sorted order
-    
+{
     private:
-    void Inoder(Node*root,vector<int> &ans)
-    {
-        if (root!=NULL)
-        {
-            Inoder(root->left,ans);
-            ans.push_back(root->data);
-            Inoder(root->right,ans);
-        }
+    bool checkBST(Node* root, int min, int max){
+        
+        // Base case
+        if(root==NULL)
+            return true;
+            
+        if(root->data<min || root->data>max)
+            return false;
+            
+        bool checkLeft = checkBST(root->left, min, root->data-1);
+        bool checkRight = checkBST(root->right, root->data+1, max);
+        
+        return checkRight&&checkLeft;
     }
     public:
     //Function to check whether a Binary Tree is BST or not.
     bool isBST(Node* root) 
     {
-        vector<int> V;
-        Inoder(root,V);
-        
-        return is_sorted(V.begin(),V.end());
+        return checkBST(root, INT_MIN, INT_MAX);
     }
 };
 
