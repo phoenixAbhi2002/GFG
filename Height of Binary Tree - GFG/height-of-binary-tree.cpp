@@ -99,11 +99,31 @@ struct Node
 class Solution{
     public:
     //Function to find the height of a binary tree.
-    int height(struct Node* root){
-        if(root == NULL) 
+    int height(struct Node* node){
+        // Level order traversal / BFS
+        queue<Node*> q;
+        
+        if(node==NULL)
             return 0;
-           
-        return 1 + max(height(root->left), height(root->right));
+            
+        int h=0;
+        q.push(node);
+        
+        while(!q.empty()){
+            int sz = q.size();
+            while(sz--){
+                Node* f=q.front();
+                q.pop();
+                // pushing the left child of the node
+                if(f->left!=NULL)
+                    q.push(f->left);
+                // pushing the right child of the node
+                if(f->right!=NULL)
+                    q.push(f->right);
+            }
+            h++;
+        }
+        return h;
     }
 };
 
