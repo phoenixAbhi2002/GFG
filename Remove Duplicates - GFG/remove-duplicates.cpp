@@ -10,16 +10,20 @@ public:
 		
 	string removeDups(string S) 
 	{
-	    for(int i=0; i<S.size(); i++){
-            for(int j=i+1; j<S.size(); j++){
-                if(S[j]==S[i]){
-                    // Deletes 1 characters from index number j
-                    S.erase(j,1);
-                    j--;
-                }
-            }
-        }
-        return S;
+	    unordered_map<char, int> mp;
+	    string res;
+	    
+	    for(int i=0; i<S.size(); i++)
+	    {
+	        mp[S[i]]++;
+	        if(mp[S[i]] == 1)
+	        {
+	            res.push_back(S[i]);
+	        }
+	        
+	    }
+	    
+	    return res;
 	}
 };
 
