@@ -10,17 +10,25 @@ using namespace std;
 class Solution{
   public:
     int longestKSubstr(string s, int k) {
-    // your code here
-        int freq[26]={0},ans=-1,i=0,j=0,n=s.length(),sum;
-        freq[s[0]-'a']++;
-        while(j<n){
-            sum=0;
-            for(int t=0; t<26; t++) if(freq[t]!=0) sum++;
-            if(sum>k) freq[s[i++]-'a']--;
-            else{
-                if(sum==k) ans=max(ans,(j-i+1));
-                freq[s[++j]-'a']++;
+        // your code here
+        unordered_map<char, int> mp;
+        int i=0, j=0;
+        int ans = -1;
+        
+        while(j<s.length()){
+            mp[s[j]]++;
+            
+            while(mp.size()>k){
+                mp[s[i]]--;
+                if(mp[s[i]]==0){
+                    mp.erase(s[i]);
+                }
+                i++;
             }
+            if(mp.size()==k){
+                ans = max(ans, j-i+1);
+            }
+            j++;
         }
         return ans;
     }
