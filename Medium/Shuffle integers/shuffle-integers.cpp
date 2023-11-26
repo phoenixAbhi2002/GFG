@@ -8,17 +8,33 @@ class Solution{
 	
 	
 	public:
-	void shuffleArray(int a[],int n)
+	void shuffleArray(int nums[],int n)
 	{
-	    int maxval = 1e4;
-        for(int i=2, j=1; i<n; i+=2, j++) 
-            a[i] = (a[j] % maxval) * maxval + a[i];
-        for(int i=1, j=n/2; i<n; i+=2, j++)
-            a[i] = (a[j] % maxval) * maxval + a[i];
-        for(int i=1;i<n;i++)
-            a[i] = a[i] / maxval;
-    }
-		 
+	    // Your code goes here
+	    for(int i=0; i<n; i++){
+	        int currNum = nums[i];
+	        int currPos = i;
+	        
+	        while(currNum > 0){
+	            int newPos=0;
+	            if(currPos<n/2)
+	                newPos = 2*currPos;
+	            else
+	                newPos = 2*(currPos - n/2) + 1;
+	                
+	            int newNum = nums[newPos];
+	            nums[newPos] = -currNum;
+	            currNum = newNum;
+	            currPos = newPos;
+	        }
+	    }
+	    for(int i=0; i<n; i++){
+	        if(nums[i] < 0){
+	            nums[i] = -nums[i];
+	        }
+	    }
+	   // return nums;
+	}	 
 
 };
 
